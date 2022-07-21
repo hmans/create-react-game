@@ -37,6 +37,7 @@
     "printWidth": 90
   },
   "dependencies": {
+    "fs-extra": "^10.1.0",
     "kolorist": "^1.5.1",
     "minimist": "^1.2.6",
     "prompts": "^2.4.2"
