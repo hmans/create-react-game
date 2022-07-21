@@ -9,13 +9,19 @@ import prompts from "prompts"
 import { green, red } from "kolorist"
 
 function copyFolderSync(from, to) {
+	/* Abort if target directory already exists. */
 	if (fs.existsSync(to)) {
 		console.error(red("Target directory already exists, aborting"))
 		return
 	}
 
+	/* Create target directory */
 	fse.mkdirpSync(to)
+
+	/* Recursively copy all template files */
 	fs.readdirSync(from).forEach((element) => {
+		console.log(`💾 ${element}`)
+
 		if (fs.lstatSync(path.join(from, element)).isFile()) {
 			fs.copyFileSync(path.join(from, element), path.join(to, element))
 		} else {
