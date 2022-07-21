@@ -14,7 +14,8 @@
   },
   "type": "module",
   "bin": {
-    "create-game": "index.js"
+    "create-react-game": "index.js",
+    "crg": "index.js"
   },
   "files": [
     "template-*",
