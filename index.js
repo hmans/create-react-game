@@ -6,7 +6,23 @@ import path from "node:path"
 import { fileURLToPath } from "node:url"
 import minimist from "minimist"
 import prompts from "prompts"
-import { red } from "kolorist"
+import { green, red } from "kolorist"
+
+function copyFolderSync(from, to) {
+	if (fs.existsSync(to)) {
+		console.error(red("Target directory already exists, aborting"))
+		return
+	}
+
+	fse.mkdirpSync(to)
+	fs.readdirSync(from).forEach((element) => {
+		if (fs.lstatSync(path.join(from, element)).isFile()) {
+			fs.copyFileSync(path.join(from, element), path.join(to, element))
+		} else {
+			copyFolderSync(path.join(from, element), path.join(to, element))
+		}
+	})
+}
 
 console.log("Hi from create-react-game")
 var argv = minimist(process.argv.slice(2))
@@ -21,8 +37,8 @@ async function install() {
 		initial: argv._[0]
 	})
 
-	console.log(red(`Copying files, woohoo!`))
-	fse.copySync(templateDir, targetDir, {})
+	console.log(green(`Copying files, woohoo!`))
+	copyFolderSync(templateDir, targetDir)
 }
 
 await install()
