@@ -27,6 +27,15 @@
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
   },
+  "prettier": {
+    "trailingComma": "none",
+    "tabWidth": 2,
+    "useTabs": true,
+    "semi": false,
+    "singleQuote": false,
+    "arrowParens": "always",
+    "printWidth": 90
+  },
   "dependencies": {
     "kolorist": "^1.5.1",
     "minimist": "^1.2.6",
