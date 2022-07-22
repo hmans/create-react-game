@@ -1,36 +1,40 @@
 #!/usr/bin/env node
 
 import degit from "degit"
-import { green, yellow } from "kolorist"
+import { cyan, green, red, yellow } from "kolorist"
 import minimist from "minimist"
 import prompts from "prompts"
 
-console.log("Welcome to Create-React-Game!")
-var argv = minimist(process.argv.slice(2))
+async function main() {
+	console.log("Welcome to Create-React-Game!")
+	var argv = minimist(process.argv.slice(2))
 
-async function install() {
-	const { targetDir } = await prompts({
-		type: "text",
-		name: "targetDir",
-		message: "Please choose a target directory:",
-		initial: argv._[0]
-	})
+	try {
+		const { targetDir } = await prompts({
+			type: "text",
+			name: "targetDir",
+			message: "Please choose a target directory:",
+			initial: argv._[0]
+		})
 
-	console.log(yellow`Cloning template into target directory...`)
+		console.log(yellow(`Cloning template into ${cyan(targetDir)}...`))
 
-	const emitter = degit("hmans/create-react-game/template-react-game", {
-		cache: false,
-		force: false,
-		verbose: false
-	})
+		const emitter = degit("hmans/create-react-game/template-react-game", {
+			cache: false,
+			force: false,
+			verbose: false
+		})
 
-	emitter.on("info", (info) => {
-		// console.log(info.message)
-	})
+		// emitter.on("info", (info) => {
+		// 	console.log(info.message)
+		// })
 
-	await emitter.clone(targetDir)
+		await emitter.clone(targetDir)
 
-	console.log(green`Done!`)
+		console.log(green("Done!"))
+	} catch (error) {
+		console.error(red(`Aborting with error: ${error.message}`))
+	}
 }
 
-await install()
+await main()
