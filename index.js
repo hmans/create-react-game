@@ -1,26 +1,22 @@
 #!/usr/bin/env node
-import fs from "node:fs"
-import fse from "fs-extra"
-
-import path from "node:path"
-import minimist from "minimist"
-import prompts from "prompts"
-import { green, red } from "kolorist"
 
 import degit from "degit"
+import { green, yellow } from "kolorist"
+import minimist from "minimist"
+import prompts from "prompts"
 
-console.log("Hi from create-react-game")
+console.log("Welcome to Create-React-Game!")
 var argv = minimist(process.argv.slice(2))
 
 async function install() {
 	const { targetDir } = await prompts({
 		type: "text",
 		name: "targetDir",
-		message: "Waagh?",
+		message: "Please choose a target directory:",
 		initial: argv._[0]
 	})
 
-	console.log(green(`Copying files, woohoo!`))
+	console.log(yellow`Cloning template into target directory...`)
 
 	const emitter = degit("hmans/create-react-game/template-react-game", {
 		cache: false,
