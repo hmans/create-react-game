@@ -1,24 +1,32 @@
 #!/usr/bin/env node
 
 import degit from "degit"
+import { execa, execaCommandSync } from "execa"
 import { cyan, green, red, yellow } from "kolorist"
 import minimist from "minimist"
 import prompts from "prompts"
+import detectPackageManager from "which-pm-runs"
 
 async function main() {
+	/* Say hi */
 	console.log("Welcome to Create-React-Game!")
 	var argv = minimist(process.argv.slice(2))
 
+	/* Prepare some things */
+	const packageManager = detectPackageManager()?.name || "npm"
+	console.log(`Detected package manager: ${packageManager}`)
+
 	try {
-		const { targetDir } = await prompts({
+		/* Determine target directory */
+		const { cwd } = await prompts({
 			type: "text",
-			name: "targetDir",
+			name: "cwd",
 			message: "Please choose a target directory:",
 			initial: argv._[0]
 		})
 
-		console.log(yellow(`Cloning template into ${cyan(targetDir)}...`))
-
+		/* Clone project */
+		console.log(yellow(`Cloning template into ${cyan(cwd)}...`))
 		const emitter = degit("hmans/create-react-game/template-react-game", {
 			cache: false,
 			force: false,
@@ -29,8 +37,15 @@ async function main() {
 		// 	console.log(info.message)
 		// })
 
-		await emitter.clone(targetDir)
+		await emitter.clone(cwd)
 
+		/* Initialize a git repository */
+		console.log(yellow("Initializing git repository..."))
+		execaCommandSync(`git init`, { cwd })
+		execaCommandSync(`git add .`, { cwd })
+		execaCommandSync(`git commit -am "Let's\\ go\\ 🚀"`, { cwd })
+
+		/* Done! */
 		console.log(green("Done!"))
 	} catch (error) {
 		console.error(red(`Aborting with error: ${error.message}`))

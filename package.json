@@ -42,10 +42,12 @@
 	},
 	"dependencies": {
 		"degit": "^2.8.4",
+		"execa": "^6.1.0",
 		"fs-extra": "^10.1.0",
 		"kolorist": "^1.5.1",
 		"minimist": "^1.2.6",
 		"prompts": "^2.4.2",
-		"rimraf": "^3.0.2"
+		"rimraf": "^3.0.2",
+		"which-pm-runs": "^1.1.0"
 	}
 }
