@@ -45,6 +45,10 @@ async function main() {
 		execaCommandSync(`git add .`, { cwd })
 		execaCommandSync(`git commit -am "Let's\\ go\\ 🚀"`, { cwd })
 
+		/* Install dependencies */
+		console.log(yellow("Installing dependencies..."))
+		execaCommandSync(`${packageManager} install`, { cwd })
+
 		/* Done! */
 		console.log(green("Done!"))
 	} catch (error) {
