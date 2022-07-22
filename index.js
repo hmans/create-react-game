@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import degit from "degit"
-import { execa, execaCommandSync } from "execa"
+import { execaCommandSync } from "execa"
 import { cyan, green, red, yellow } from "kolorist"
 import minimist from "minimist"
 import prompts from "prompts"
