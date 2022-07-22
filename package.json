@@ -28,7 +28,8 @@
 		"node": "^14.18.0 || >=16.0.0"
 	},
 	"scripts": {
-		"clean": "rimraf template-react-game/node_modules"
+		"build": "yarn clean",
+		"clean": "rimraf template-react-game/node_modules template-react-game/dist"
 	},
 	"prettier": {
 		"trailingComma": "none",
