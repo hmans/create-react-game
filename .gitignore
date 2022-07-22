@@ -1,3 +1,6 @@
+# Ignore some specific files from the templates
+/template-*/yarn.lock
+
 # Logs
 logs
 *.log
