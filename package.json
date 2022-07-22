@@ -1,6 +1,6 @@
 {
 	"name": "create-react-game",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"private": false,
 	"license": "MIT",
 	"author": {
@@ -14,8 +14,7 @@
 	},
 	"type": "module",
 	"bin": {
-		"create-react-game": "index.js",
-		"crg": "index.js"
+		"create-react-game": "index.js"
 	},
 	"files": [
 		"template-*",
@@ -29,7 +28,8 @@
 	},
 	"scripts": {
 		"build": "yarn clean",
-		"clean": "rimraf template-react-game/node_modules template-react-game/dist"
+		"clean": "rimraf template-react-game/node_modules template-react-game/dist",
+		"prepublish": "yarn build"
 	},
 	"prettier": {
 		"trailingComma": "none",
